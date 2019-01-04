@@ -1,4 +1,7 @@
 <!-- 定义导航栏 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
     <!-- 导航栏商标 -->
@@ -6,14 +9,31 @@
     <!-- 导航入口 -->
     <div>
       <ul class="navbar-nav">
-        <!-- 条目 -->
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'article:article_list' %}">文章</a>
-        </li>
-        <li class="nav-item">
+    ...
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'article:article_list' %}">文章</a>
+    </li>
+    <li class="nav-item">
           <a class="nav-link" href="{% url 'article:article_create' %}">写文章</a>
         </li>
-      </ul>
+    <!-- Django的 if 模板语句 -->
+    {% if user.is_authenticated %}
+        <!-- 如果用户已经登录，则显示用户名下拉框 -->
+        <!-- 如果用户已经登录，则显示用户名下拉框 -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ user.username }}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'article:article_create' %}">写文章</a>
+                <a class="dropdown-item" href='{% url "userprofile:logout" %}'>退出登录</a>
+             </div>
+        </li>                
+    <!-- if 语句在这里结束 -->
+    {% endif %}
+</ul>
+  
     </div>
   </div>
 </nav>
+
